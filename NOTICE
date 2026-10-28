@@ -1,0 +1,47 @@
+leitor-rfa
+Copyright 2026 Stahlseg Engenharia
+Licenciado sob a licença MIT (ver LICENSE).
+
+------------------------------------------------------------------------------
+Código derivado do rvt-rs
+------------------------------------------------------------------------------
+
+Partes deste projeto são portes para Python de arquivos do rvt-rs
+(https://github.com/DrunkOnJava/rvt-rs, commit 8978040), "open reader for
+Autodesk Revit files", Copyright 2026 Griffin Long, licenciado sob a
+Apache License 2.0 (texto integral em LICENSE-APACHE):
+
+  leitor_rfa/compressao.py  <- src/compression.rs
+  leitor_rfa/segmentos.py   <- src/native_segments.rs (walk_inflated)
+  leitor_rfa/esquema.py     <- src/schema_registry.rs (parse), src/formats.rs
+  leitor_rfa/elemtable.py   <- src/elem_table.rs
+  leitor_rfa/grafo.py       <- src/native_parameters.rs (decode_graph)
+
+Os trechos portados foram reescritos e estendidos às versões 2010–2014 do
+formato, que o rvt-rs não cobre; cada um desses arquivos diz no cabeçalho de
+onde veio. Essas partes continuam sob a Apache License 2.0; o restante do
+projeto é MIT.
+
+------------------------------------------------------------------------------
+Marcas e método
+------------------------------------------------------------------------------
+
+"Autodesk" e "Revit" são marcas registradas da Autodesk, Inc. Este projeto
+não é afiliado à Autodesk nem endossado ou patrocinado por ela; os nomes
+aparecem só para identificar o formato de arquivo que o leitor lê.
+
+Nenhuma parte deste projeto foi obtida decompilando, depurando ou
+instrumentando o Revit ou suas bibliotecas: o formato foi decifrado a partir
+dos bytes de arquivos .rfa, e os rótulos que o arquivo não traz por extenso
+(nomes de parâmetros embutidos, grupos, categorias) foram aprendidos
+comparando com o que o Revit exporta, pela API dele, das mesmas famílias.
+O projeto não usa nem distribui código ou SDK da Autodesk e não distribui
+arquivos .rfa de terceiros: os testes que precisam deles os leem de uma
+pasta fora do repositório (LEITOR_RFA_FIXTURES).
+
+English: portions of this project are Python ports of rvt-rs (Apache-2.0,
+Copyright 2026 Griffin Long), listed above; those portions remain under
+Apache-2.0 and the rest of the project is MIT. Not affiliated with Autodesk.
+The format was decoded from .rfa file bytes only; labels the file does not
+spell out were learned from what Revit exports for the same families through
+its API. Revit was never decompiled, debugged or instrumented.

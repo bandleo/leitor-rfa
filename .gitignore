@@ -1,0 +1,15 @@
+dados/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.venv/
+build/
+dist/
+tests/fixtures/
+tests/arquivos/
+*.rfa
+familia.json
+.env*
+.claude/
+venv/
+*.pyc

@@ -1,0 +1,549 @@
+{
+ "fonte": "aprendido de 106 famílias exportadas de dentro do Revit 2025",
+ "grupo": {
+  "-5000100": "Dados de identidade",
+  "-5000101": "Cotas",
+  "-5000111": "Hidráulica",
+  "-5000105": "Materiais e acabamentos",
+  "-1": "Outros",
+  "-5000113": "Mecânica",
+  "-5000119": "Restrições",
+  "-5000114": "Fases",
+  "-5000123": "Texto",
+  "-5000103": "Construção",
+  "-5000175": "Dados",
+  "-5000125": "Componentes elétricos - Cargas",
+  "-5000127": "Mecânica – Vazão",
+  "-5000110": "Engenharia elétrica",
+  "-5000131": "Parâmetros IFC"
+ },
+ "tipo_dado": {
+  "ParamDefString|None": "autodesk.spec:spec.string-2.0.0",
+  "ParamDefValue|0": "autodesk.spec.aec:length-2.0.1",
+  "ParamDefValue|4": "autodesk.spec.aec:number-2.0.0",
+  "ParamDefValue|39": "autodesk.spec.aec.piping:pressure-2.0.0",
+  "ParamDefMaterialBrowse|None": "autodesk.spec.aec:material-1.0.0",
+  "ParamDefFixtureUnit|4": "autodesk.spec.aec:number-2.0.0",
+  "ParamDefInt|None": "autodesk.spec:spec.int64-2.0.0",
+  "ParamDefURL|None": "autodesk.spec.string:url-2.0.0",
+  "ParamDefValue|43": "autodesk.spec.aec.piping:pipeSize-2.0.0",
+  "ParamDefValue|3": "autodesk.spec.aec:angle-2.0.0",
+  "ParamDefValue|20": "autodesk.spec.aec.electrical:potential-2.0.0",
+  "ParamDefYesNo|None": "autodesk.spec:spec.bool-1.0.0",
+  "ParamDefValue|37": "autodesk.spec.aec.piping:flow-2.0.0",
+  "ParamDefValue|19": "autodesk.spec.aec.electrical:current-2.0.0",
+  "ParamDefValue|24": "autodesk.spec.aec.electrical:power-2.0.1"
+ },
+ "embutidos": {
+  "-1010104": {
+   "nome": "URL",
+   "grupo": "Dados de identidade",
+   "tipo_dado": "autodesk.spec.string:url-2.0.0",
+   "instancia": false,
+   "reporting": false
+  },
+  "-1010109": {
+   "nome": "Modelo",
+   "grupo": "Dados de identidade",
+   "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+   "instancia": false,
+   "reporting": false
+  },
+  "-1010108": {
+   "nome": "Fabricante",
+   "grupo": "Dados de identidade",
+   "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+   "instancia": false,
+   "reporting": false
+  },
+  "-1010103": {
+   "nome": "Descrição",
+   "grupo": "Dados de identidade",
+   "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+   "instancia": false,
+   "reporting": false
+  },
+  "-1002500": {
+   "nome": "Código de montagem",
+   "grupo": "Dados de identidade",
+   "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+   "instancia": false,
+   "reporting": false
+  },
+  "-1001320": {
+   "nome": "Elevação-padrão",
+   "grupo": "Restrições",
+   "tipo_dado": "autodesk.spec.aec:length-2.0.1",
+   "instancia": false,
+   "reporting": false
+  },
+  "-1010105": {
+   "nome": "Comentários de tipos",
+   "grupo": "Dados de identidade",
+   "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+   "instancia": false,
+   "reporting": false
+  }
+ },
+ "acrescentados": {
+  "-2001160": [
+   {
+    "nome": "CWFU",
+    "grupo": "Mecânica",
+    "tipo_dado": "autodesk.spec.aec:number-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Comentários de tipos",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Conexão CW",
+    "grupo": "Hidráulica",
+    "tipo_dado": "autodesk.spec:spec.bool-1.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Conexão HW",
+    "grupo": "Hidráulica",
+    "tipo_dado": "autodesk.spec:spec.bool-1.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Conexão de resíduos",
+    "grupo": "Hidráulica",
+    "tipo_dado": "autodesk.spec:spec.bool-1.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Conexão de ventilação",
+    "grupo": "Hidráulica",
+    "tipo_dado": "autodesk.spec:spec.bool-1.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Custo",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.measurable:currency-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Código de montagem",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Exportar tipo para IFC como",
+    "grupo": "Parâmetros IFC",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "HWFU",
+    "grupo": "Mecânica",
+    "tipo_dado": "autodesk.spec.aec:number-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Modelo",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Nota-chave",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Tipo IFC predefinido [Tipo]",
+    "grupo": "Parâmetros IFC",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Tipo de imagem",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.reference:image-1.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "URL",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.string:url-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "WFU",
+    "grupo": "Mecânica",
+    "tipo_dado": "autodesk.spec.aec:number-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   }
+  ],
+  "-2008055": [
+   {
+    "nome": "Coeficiente K",
+    "grupo": "Mecânica",
+    "tipo_dado": "autodesk.spec.aec:number-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Comentários de tipos",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Custo",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.measurable:currency-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Código de montagem",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Elevação padrão",
+    "grupo": "Restrições",
+    "tipo_dado": "autodesk.spec.aec:length-2.0.1",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Exportar tipo para IFC como",
+    "grupo": "Parâmetros IFC",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Modelo",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Método de perda",
+    "grupo": "Mecânica",
+    "tipo_dado": "",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Nota-chave",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Tabela de coeficiente K",
+    "grupo": "Mecânica",
+    "tipo_dado": "",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Tipo IFC predefinido [Tipo]",
+    "grupo": "Parâmetros IFC",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Tipo de imagem",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.reference:image-1.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "URL",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.string:url-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Utilizar escala de anotação",
+    "grupo": "Gráficos",
+    "tipo_dado": "autodesk.spec:spec.bool-1.0.0",
+    "instancia": true,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   }
+  ],
+  "-2001140": [
+   {
+    "nome": "Comentários de tipos",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Custo",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.measurable:currency-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Código de montagem",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Descrição",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Elevação padrão",
+    "grupo": "Restrições",
+    "tipo_dado": "autodesk.spec.aec:length-2.0.1",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Exportar tipo para IFC como",
+    "grupo": "Parâmetros IFC",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Fabricante",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Modelo",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Nota-chave",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Tipo IFC predefinido [Tipo]",
+    "grupo": "Parâmetros IFC",
+    "tipo_dado": "autodesk.spec:spec.string-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "Tipo de imagem",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.reference:image-1.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   },
+   {
+    "nome": "URL",
+    "grupo": "Dados de identidade",
+    "tipo_dado": "autodesk.spec.string:url-2.0.0",
+    "instancia": false,
+    "compartilhado": false,
+    "guid": null,
+    "reporting": false
+   }
+  ]
+ },
+ "conflitos": [
+  {
+   "unidade": "0",
+   "valores": [
+    [
+     [
+      304.8,
+      " mm"
+     ],
+     97
+    ],
+    [
+     [
+      0.3048,
+      " m"
+     ],
+     1
+    ]
+   ]
+  }
+ ],
+ "referencia_plano": {
+  "4": "Centro (Frontal/Traseira)",
+  "1": "Centro (Esquerda/Direita)",
+  "14": "Referência fraca",
+  "nome_vazio": "Plano de referência",
+  "12": "Não é uma referência",
+  "7": "Centro (Elevação)",
+  "2": "Direita"
+ },
+ "categoria": {
+  "-2001160": "Peças hidrossanitárias",
+  "-2008055": "Acessórios do tubo",
+  "-2000280": "Blocos de margens e carimbo",
+  "-2008049": "Conexões de tubo",
+  "-2000151": "Modelos genéricos",
+  "-2000150": "Anotações genéricas",
+  "-2001140": "Equipamento mecânico",
+  "-2002000": "Itens de detalhe"
+ },
+ "vinculo_forma": {
+  "-1002107": "parametro_material"
+ },
+ "formulas": {
+  "binarios": {
+   "3": "*",
+   "4": "/",
+   "1": "+",
+   "2": "-"
+  },
+  "unarios": {},
+  "funcoes": {
+   "10": "if"
+  },
+  "unidades": {
+   "0": [
+    304.8,
+    " mm"
+   ],
+   "4": [
+    1.0,
+    ""
+   ]
+  },
+  "unidades_por_spec": {
+   "autodesk.spec.aec:length": [
+    304.8,
+    " mm"
+   ],
+   "autodesk.spec.aec:number": [
+    1.0,
+    ""
+   ]
+  }
+ }
+}
