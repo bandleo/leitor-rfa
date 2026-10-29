@@ -1,10 +1,11 @@
-dados/
+/dados/
 __pycache__/
 *.egg-info/
 .pytest_cache/
 .venv/
 build/
 dist/
+web/node_modules/
 tests/fixtures/
 tests/arquivos/
 *.rfa
@@ -13,3 +14,4 @@ familia.json
 .claude/
 venv/
 *.pyc
+node_modules/

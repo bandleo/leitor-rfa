@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leitor RFA</title>
+    <meta name="description" content="Abra uma família do Revit (.rfa) sem o Revit: tipos, parâmetros, fórmulas, formas, 3D e exportação para o BIMCraft." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3 28 10v12L16 29 4 22V10z' fill='%231f6fd1'/%3E%3Cpath d='M16 3v26M4 10l12 7 12-7' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E" />
+  </head>
+  <body>
+    <header class="topo">
+      <div class="marca">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3 28 10v12L16 29 4 22V10z" /><path class="vinco" d="M16 3v26M4 10l12 7 12-7" /></svg>
+        <span>Leitor RFA</span>
+      </div>
+      <div class="arquivo" id="arquivo" hidden></div>
+      <div class="acoes">
+        <button type="button" class="botao" id="abrir">Abrir .rfa</button>
+        <a class="botao primario" id="exportar" aria-disabled="true" download>Exportar família BIMCraft</a>
+      </div>
+      <input type="file" id="escolher" accept=".rfa" hidden />
+    </header>
+
+    <main>
+      <section class="vazio" id="vazio">
+        <div class="soltar" id="soltar">
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6 40 15v18L24 42 8 33V15z" /><path d="M24 6v36M8 15l16 9 16-9" /></svg>
+          <h1>Solte um arquivo .rfa</h1>
+          <p>A família é lida aqui no seu computador, sem o Revit. Nada sai da máquina.</p>
+          <button type="button" class="botao primario" id="escolher-vazio">Escolher arquivo</button>
+          <ul class="ganhos">
+            <li>Tipos, parâmetros e fórmulas como na caixa Tipos de família</li>
+            <li>3D a partir da geometria que o próprio Revit gravou no arquivo</li>
+            <li>Exportação da família para o BIMCraft</li>
+          </ul>
+        </div>
+        <p class="erro" id="erro-vazio" role="alert" hidden></p>
+      </section>
+
+      <section class="familia" id="familia" hidden>
+        <nav class="abas" role="tablist" id="abas"></nav>
+        <div class="painel" id="painel-resumo" role="tabpanel">
+          <div class="resumo">
+            <div class="cartao vista">
+              <div class="ferramentas">
+                <div class="segmentos" role="group" aria-label="Vista" id="vistas"></div>
+                <label class="alternar"><input type="checkbox" id="ocultas" /> Mostrar o que o Revit oculta</label>
+              </div>
+              <div class="tela" id="tela">
+                <div class="aguarde" id="aguarde"><span class="giro"></span><span id="aguarde-texto">Gerando o 3D…</span></div>
+              </div>
+              <div class="rodape-vista">
+                <span class="selo" id="selo"></span>
+                <span class="medida" id="medida"></span>
+              </div>
+              <ul class="detalhes" id="detalhes"></ul>
+            </div>
+            <aside class="lateral">
+              <figure class="cartao miniatura">
+                <img id="miniatura" alt="Miniatura gravada pelo Revit" />
+                <figcaption>Miniatura gravada pelo Revit</figcaption>
+              </figure>
+              <div class="cartao">
+                <h2>Família</h2>
+                <dl class="fatos" id="fatos"></dl>
+              </div>
+              <div class="cartao">
+                <h2>Partes do 3D</h2>
+                <ul class="partes" id="partes"></ul>
+              </div>
+            </aside>
+          </div>
+        </div>
+        <div class="painel" id="painel-tabela" role="tabpanel" hidden></div>
+      </section>
+    </main>
+
+    <div class="cobrir" id="cobrir" hidden><div>Solte para abrir</div></div>
+    <script type="module" src="./app/main.ts"></script>
+  </body>
+</html>

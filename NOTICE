@@ -16,11 +16,22 @@ Apache License 2.0 (texto integral em LICENSE-APACHE):
   leitor_rfa/esquema.py     <- src/schema_registry.rs (parse), src/formats.rs
   leitor_rfa/elemtable.py   <- src/elem_table.rs
   leitor_rfa/grafo.py       <- src/native_parameters.rs (decode_graph)
+  leitor_rfa/brep.py        <- convenções de src/native_parametric_surface.rs
+                               (Plane, CylSurf, SurfRev, RuledSurf) e do
+                               percurso de laços de src/native_saved_mesh.rs
 
 Os trechos portados foram reescritos e estendidos às versões 2010–2014 do
 formato, que o rvt-rs não cobre; cada um desses arquivos diz no cabeçalho de
 onde veio. Essas partes continuam sob a Apache License 2.0; o restante do
 projeto é MIT.
+
+------------------------------------------------------------------------------
+three.js (página do visualizador)
+------------------------------------------------------------------------------
+
+A página pronta em leitor_rfa/web (gerada de web/ por `npm run build`) traz
+dentro o three.js 0.186.1 (https://threejs.org), Copyright © 2010-2026 three.js
+authors, licença MIT; o texto integral vai junto, em leitor_rfa/web/licencas.txt.
 
 ------------------------------------------------------------------------------
 Marcas e método

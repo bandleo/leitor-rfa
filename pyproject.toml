@@ -5,13 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "leitor-rfa"
 version = "0.1.0"
-description = "Leitor de família do Revit (.rfa) sem o Revit, com exportador JSON"
+description = "Conversor de família do Revit (.rfa) para o BIMCraft, sem o Revit: lê o arquivo e exporta JSON, 3D e a família BIMCraft"
 readme = "README.md"
 license = "MIT AND Apache-2.0"
 license-files = ["LICENSE", "LICENSE-APACHE", "NOTICE"]
 requires-python = ">=3.11"
 dependencies = ["olefile>=0.47"]
-keywords = ["revit", "rfa", "bim", "reverse-engineering"]
+keywords = ["revit", "rfa", "bim", "bimcraft", "converter", "reverse-engineering"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
@@ -24,6 +24,7 @@ Repository = "https://github.com/bandleo/leitor-rfa"
 
 [project.optional-dependencies]
 dev = ["pytest>=9"]
+3d = ["numpy", "ifcopenshell"]  # só o medidor (scripts/medir_geometria.py); o 3D do leitor é Python puro
 
 [project.scripts]
 ler-rfa = "leitor_rfa.cli:main"
@@ -32,7 +33,7 @@ ler-rfa = "leitor_rfa.cli:main"
 packages = ["leitor_rfa"]
 
 [tool.setuptools.package-data]
-leitor_rfa = ["tabelas.json"]
+leitor_rfa = ["tabelas.json", "web/*", "web/assets/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

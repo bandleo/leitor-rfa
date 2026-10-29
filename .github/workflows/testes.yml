@@ -28,3 +28,17 @@ jobs:
         env:
           PYTHONUTF8: "1"
         run: pytest -q
+
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx vitest run

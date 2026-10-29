@@ -175,6 +175,24 @@ def vinculos(g):
     return [(_id(v["m_famParamId"]), _id(v["m_elemPropId"])) for v in itens]
 
 
+# passo de geometria da laje/parede de referência dos gabaritos "baseado em piso/parede/teto": o Revit
+# a desenha no editor da família, mas ela é o hospedeiro simulado e não faz parte da família no projeto
+HOSPEDEIRO = "AddGeomToHostInFamEnvGStep"
+
+
+def hospedeiro_simulado(gr):
+    """Forma do ambiente do hospedeiro (laje/parede de referência do gabarito), não da família.
+
+    2018+: o passo AddGeomToHostInFamEnvGStep. Em todas as versões (2012–2018): o primeiro passo de geometria
+    da forma (ExtrusionGStep…) tem m_flags sem o bit 0x80000 — 0x19F3D/0x39F3D nas lajes e paredes de
+    referência (93 nas 106 do gabarito, quase todas a extrusão 1537 que o próprio gabarito cria), contra
+    0xB9F7D/0xBDF7D em todas as 672 formas da família."""
+    if any(o.classe == HOSPEDEIRO for o in gr.objetos):
+        return True
+    passo = next((o for o in gr.objetos if o.classe.endswith("GStep")), None)
+    return passo is not None and passo.campos.get("m_flags") is not None and not passo.campos["m_flags"] & 0x80000
+
+
 def ler_formas(el, corpos, esquema, nomes, tabelas=TABELAS):
     """Devolve (formas, falhas). Forma que não decodifica entra só com o tipo, para não desalinhar a lista."""
     filhos = collections.defaultdict(list)
@@ -192,6 +210,8 @@ def ler_formas(el, corpos, esquema, nomes, tabelas=TABELAS):
             g = decodificar(corpos[i], esquema)
             c = g.raiz.campos
             forma["solido"] = not c["m_cutting"]
+            if hospedeiro_simulado(g):
+                forma["hospedeiro_simulado"] = True  # além do v1: o Revit não a mostra no projeto
             for parametro, propriedade in vinculos(g):
                 campo = tabelas["vinculo_forma"].get(str(propriedade))
                 if campo:

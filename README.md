@@ -1,26 +1,57 @@
 # leitor-rfa
 
-Lê uma família do Revit (`.rfa`) **sem o Revit** e devolve um JSON com o que ela é: nome, categoria, tipos, parâmetros com valores e fórmulas, planos de referência, cotas, famílias aninhadas, formas (com o esboço) e a miniatura. Cada seção diz, no bloco `cobertura`, se foi decifrada, decifrada em parte ou não.
+Converte uma família do Revit (`.rfa`) em **família do BIMCraft**, sem o Revit. Lê o arquivo direto, entende o que ele é e grava a família do BIMCraft com a categoria, os parâmetros, os tipos, as fórmulas e as formas que o BIMCraft sabe montar; o que não dá para converter vai num relatório, com o motivo.
+
+No caminho, devolve também um JSON com tudo o que a família é (nome, categoria, tipos, parâmetros com valores e fórmulas, planos de referência, cotas, famílias aninhadas, formas com o esboço e a miniatura) e o 3D que o próprio Revit gravou no arquivo. Cada seção diz, no bloco `cobertura`, se foi decifrada, decifrada em parte ou não.
 
 Python puro; a única dependência é o [`olefile`](https://pypi.org/project/olefile/). Roda no Windows e no Linux.
 
-*English summary at the end.*
+*English version: [README.en.md](README.en.md).*
 
 ## Instalar e usar
 
 ```bash
 pip install git+https://github.com/bandleo/leitor-rfa
-ler-rfa familia.rfa -o familia.json --miniatura familia.png
+ler-rfa visualizar
 ```
 
-Em Python:
+`ler-rfa visualizar` abre no navegador uma página local: solte um `.rfa`, confira o resumo, os tipos × parâmetros, as fórmulas, as formas, a cobertura e o **3D ao lado da miniatura do Revit**, e clique em **Exportar família BIMCraft** (um `.zip` com a família e o arquivo de dados). O servidor só escuta em `127.0.0.1`; o arquivo não sai da máquina.
+
+Pela linha de comando:
+
+```bash
+ler-rfa familia.rfa -o familia.json --miniatura familia.png --glb familia.glb
+python -m leitor_rfa.bimcraft familia.json -o familia-bimcraft.json --dados familia-dados.json
+```
+
+## O que vai para o BIMCraft
+
+| No Revit | Na família do BIMCraft |
+|---|---|
+| Categoria | Peças hidrossanitárias → `plumbing`; as demais → `generic` |
+| Parâmetros de comprimento, ângulo, número, sim/não e material | parâmetros com o valor de cada tipo (em mm e graus); nomes ajustados à regra do BIMCraft |
+| Fórmulas | passam quando só usam o que o BIMCraft tem (mm, `if`, `and`, `or`, `not`, `min`, `max`, `abs`, `sqrt`, `round`, `sin`, `cos`, `tan`…) |
+| Parâmetros de texto e URL | não existem na família do BIMCraft: vão para o arquivo de dados, por tipo |
+| Extrusões e revoluções | formas no plano xy, xz ou yz; laço dentro de laço vira furo; forma vazia vira `void` |
+| Varreduras e mesclas | ficam de fora (o BIMCraft não varre por caminho nem mescla perfis) e entram no relatório |
+| Laje ou parede de referência do gabarito | fica de fora: o Revit não a mostra no projeto |
+
+O arquivo de dados (`--dados`, ou o `-dados.json` do `.zip`) traz o relatório: o que ficou de fora e por quê, os nomes ajustados e os textos por tipo. Testado com o BIMCraft 0.8 (`bimcraft-cli`).
+
+## 3D
+
+O 3D (`--glb`, e na página) sai da geometria que o próprio Revit grava dentro do `.rfa` (o B-rep regenerado, já com cortes e junções): cada face vira triângulos dentro de 0,5 mm da superfície, e as arestas são as que o Revit desenha. Um selo diz se o 3D está completo ou o que falta (famílias aninhadas e CAD importado ainda não têm 3D). A laje ou parede de referência dos gabaritos baseados em hospedeiro, que o Revit não mostra no projeto, vem marcada e fica oculta.
+
+## Em Python
 
 ```python
 from leitor_rfa.documento import ler
+from leitor_rfa.bimcraft import converter
 
 doc = ler("familia.rfa")
 doc["familia"]["nome"], list(doc["tipos"])
 doc["cobertura"]["secoes"]["parametros"]["estado"]   # "decifrado" | "parcial" | "nao_decifrado"
+familia_bimcraft, relatorio = converter(doc)
 ```
 
 Para pastas inteiras: `python -m leitor_rfa.lote <pasta> -o relatorio.json --jsons <saida>` grava um JSON por família e um resumo de cobertura por versão.
@@ -61,13 +92,15 @@ Medida campo a campo contra um gabarito de 106 famílias exportadas pelo própri
 | 2022 em diante | o grupo do parâmetro fica nulo (o arquivo guarda um identificador sem o rótulo) |
 | 2010 e 2011 | só metadados e miniatura: esses arquivos não têm PartAtom, e o enquadramento das partições ainda não foi decifrado |
 
-Ainda não sai a geometria 3D pronta (malha) nem o valor dos parâmetros de material. O método e o que se sabe do formato estão em [`docs/formato.md`](docs/formato.md).
+**3D** (contra o IFC que o Revit exporta das mesmas famílias, P95 da distância entre as superfícies ≤ 2 mm): 82 de 102 famílias; 59 de 63 das que saem com 3D completo. Ainda não sai o valor dos parâmetros de material. O método e o que se sabe do formato estão em [`docs/formato.md`](docs/formato.md).
 
 ## Testes
 
 ```bash
 pip install -e .[dev]
 pytest -q
+cd web && npm ci && npm test        # visualizador e página (Vitest)
+npm run build                       # gera a página em leitor_rfa/web
 ```
 
 Os testes sintéticos rodam em qualquer lugar. Os que comparam com arquivos reais precisam de `.rfa` de terceiros, que **não vêm no repositório**: aponte `LEITOR_RFA_FIXTURES` para uma pasta com `fixtures/<nome>/familia.rfa` + `familia.json` (o gabarito) e `arquivos/*.rfa`. Sem ela, esses testes são pulados.
@@ -84,10 +117,4 @@ MIT ([`LICENSE`](LICENSE)). Os arquivos portados do rvt-rs seguem sob Apache-2.0
 
 ---
 
-## English summary
-
-**leitor-rfa** reads Autodesk Revit family files (`.rfa`) **without Revit** and outputs JSON: family name and category, types, parameters with per-type values and formulas, reference planes, dimensions, nested families, forms (extrusion, revolution, sweep, blend, with their sketch in mm) and the preview image. A `cobertura` (coverage) block states, per section, whether it was fully decoded, partially decoded or not decoded.
-
-Pure Python; the only dependency is `olefile`. Validated field by field against 106 families exported by Revit itself, and run without a single crash on about 2,700 files from Revit 2010–2025. Install with `pip install git+https://github.com/bandleo/leitor-rfa` and run `ler-rfa family.rfa -o family.json`. Code, field names and docs are in Brazilian Portuguese.
-
-The format was decoded from the bytes of `.rfa` files; Revit was never decompiled, debugged or instrumented. Labels the file does not spell out (built-in parameter names, group and category labels, formula codes) were learned by comparing with what Revit exports for the same families through its API. Parts are Python ports of [rvt-rs](https://github.com/DrunkOnJava/rvt-rs) (Apache-2.0). Not affiliated with Autodesk. MIT licensed; the rvt-rs-derived files stay under Apache-2.0.
+**English:** full version in [README.en.md](README.en.md).

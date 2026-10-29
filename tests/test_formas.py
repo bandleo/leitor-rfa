@@ -74,3 +74,11 @@ def test_revolucao_traz_eixo_e_angulos(fixtura):
     assert sorted([y0, y1]) == pytest.approx([122.516, 132.516], abs=1e-3) and z0 == pytest.approx(z1)
     assert (f["angulo_inicio"], f["angulo_fim"]) == pytest.approx((0, 360))
     assert f["plano"]["normal"] == pytest.approx([0, 0, 1], abs=1e-9)
+
+
+@pytest.mark.parametrize("nome, n", [("r2018", 1), ("r2012", 1), ("r2014", 1)])
+def test_forma_do_hospedeiro_simulado_vem_marcada(fixtura, nome, n):
+    # a laje de referência do gabarito (o Revit não a mostra no projeto) é uma extrusão comum no arquivo
+    doc = ler(fixtura(nome) / "familia.rfa")
+    marcadas = [f for f in doc["formas"] if f.get("hospedeiro_simulado")]
+    assert len(marcadas) == n and all(f["tipo"] == "Extrusion" for f in marcadas)
